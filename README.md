@@ -13,20 +13,12 @@ A personal LLM-powered research paper recommendation engine that helps you disco
 
 ## 📋 Requirements
 
-- **Python**: 3.10, 3.11, or 3.12 (Python 3.13 not yet supported due to PyTorch compatibility)
-- **Git**: For cloning the repository
+- **Python**: 3.10, 3.11, or 3.12
 - **OpenAI API key**: Required for LLM summarization and explanations ([Get one here](https://platform.openai.com/api-keys))
 - **Disk space**: ~500MB for embedding models and dependencies
 - **Internet connection**: Required for initial setup (downloading models and packages)
 
 ## 🛠️ Installation
-
-### Prerequisites
-
-- Python 3.10, 3.11, or 3.12 (Python 3.13 not yet supported due to PyTorch compatibility)
-- Git
-- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
-- ~500MB disk space (for embedding models)
 
 ### Step-by-Step Installation
 
@@ -35,43 +27,31 @@ A personal LLM-powered research paper recommendation engine that helps you disco
 On GitHub, navigate to the repository page and click the green "Code" button to get the clone URL, then run:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/pocket-ml-paper-rag.git
+git clone https://github.com/ibayashi-hikaru/pocket-ml-paper-rag.git
 cd pocket-ml-paper-rag
 ```
 
-**Note:** Replace `YOUR_USERNAME` with the actual GitHub username or organization name where the repository is hosted. You can also use SSH if you have SSH keys set up:
+**Note:** Replace `ibayashi-hikaru` with the actual GitHub username or organization name where the repository is hosted. You can also use SSH if you have SSH keys set up:
 
 ```bash
-git clone git@github.com:YOUR_USERNAME/pocket-ml-paper-rag.git
+git clone git@github.com:ibayashi-hikaru/pocket-ml-paper-rag.git
 cd pocket-ml-paper-rag
 ```
 
 2. **Check your Python version:**
 ```bash
-python3 --version
-```
-
-**Note:** If you're using Python 3.13, you'll need to install Python 3.11 or 3.12. You can check which versions you have installed:
-```bash
-python3.11 --version  # or python3.12 --version
+python --version
 ```
 
 3. **Create a virtual environment (highly recommended):**
 ```bash
-# Using Python 3.11 (recommended)
-python3.11 -m venv venv
-
-# Or using Python 3.12
-python3.12 -m venv venv
+python -m venv venv
 ```
 
 4. **Activate the virtual environment:**
 ```bash
 # On macOS/Linux:
 source venv/bin/activate
-
-# On Windows:
-venv\Scripts\activate
 ```
 
 After activation, you should see `(venv)` in your terminal prompt.
@@ -79,43 +59,14 @@ After activation, you should see `(venv)` in your terminal prompt.
 5. **Upgrade pip (recommended):**
 ```bash
 pip install --upgrade pip
-```
-
-6. **Install dependencies:**
-```bash
 pip install -r requirements.txt
 ```
-
 This may take a few minutes as it downloads and installs PyTorch and other dependencies.
 
-7. **Set up your OpenAI API key:**
+6. **Set up your OpenAI API key:**
 
-Create a `.env` file in the project root:
 ```bash
-# On macOS/Linux:
-touch .env
-
-# On Windows:
-type nul > .env
-```
-
-Then add your OpenAI API key to the `.env` file:
-```
-OPENAI_API_KEY=your-api-key-here
-```
-
-**Note:** Never commit your `.env` file to version control. The `.gitignore` should already exclude it.
-
-Alternatively, you can set it as an environment variable:
-```bash
-# On macOS/Linux:
 export OPENAI_API_KEY="your-api-key-here"
-
-# On Windows (Command Prompt):
-set OPENAI_API_KEY=your-api-key-here
-
-# On Windows (PowerShell):
-$env:OPENAI_API_KEY="your-api-key-here"
 ```
 
 ## 🚀 Quick Start

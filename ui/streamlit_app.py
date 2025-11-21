@@ -171,8 +171,10 @@ def show_browse_page():
     """Show the browse all papers page."""
     st.header("Browse All Papers")
 
-    if st.button("Refresh", type="primary"):
-        st.rerun()
+    col1, col2 = st.columns([1, 4])
+    with col1:
+        if st.button("🔄 Refresh", type="primary"):
+            st.rerun()
 
     try:
         response = requests.get(f"{API_BASE_URL}/papers")
@@ -193,17 +195,58 @@ def show_browse_page():
                 metadata = paper.get("metadata", {})
                 title = metadata.get("title", "Unknown")
                 summary = metadata.get("summary", "")
+                paper_id = paper.get("id", "")
 
                 with st.expander(f"📄 {title}"):
-                    st.write(f"**Paper ID:** `{paper['id']}`")
-                    if summary:
-                        st.write("**Summary:**")
-                        st.write(summary)
+                    col_info, col_delete = st.columns([4, 1])
+                    
+                    with col_info:
+                        st.write(f"**Paper ID:** `{paper_id}`")
+                        if summary:
+                            st.write("**Summary:**")
+                            st.write(summary)
 
-                    keywords = metadata.get("keywords", "")
-                    if keywords:
-                        st.write("**Keywords:**")
-                        st.write(keywords.replace(",", ", "))
+                        keywords = metadata.get("keywords", "")
+                        if keywords:
+                            st.write("**Keywords:**")
+                            st.write(keywords.replace(",", ", "))
+                    
+                    with col_delete:
+                        st.write("")  # Spacing
+                        # Delete button with confirmation
+                        delete_key = f"delete_{paper_id}"
+                        if delete_key not in st.session_state:
+                            st.session_state[delete_key] = False
+                        
+                        if st.session_state[delete_key]:
+                            # Confirmation state
+                            st.warning("⚠️ Confirm deletion?")
+                            col_yes, col_no = st.columns(2)
+                            with col_yes:
+                                if st.button("✅ Yes", key=f"yes_{paper_id}"):
+                                    # Actually delete
+                                    try:
+                                        delete_response = requests.delete(f"{API_BASE_URL}/papers/{paper_id}")
+                                        if delete_response.status_code == 200:
+                                            st.success(f"✅ Paper deleted!")
+                                            st.session_state[delete_key] = False
+                                            st.rerun()
+                                        else:
+                                            error_msg = delete_response.json().get("detail", "Unknown error")
+                                            st.error(f"❌ Error: {error_msg}")
+                                            st.session_state[delete_key] = False
+                                    except Exception as e:
+                                        st.error(f"❌ Error: {str(e)}")
+                                        st.session_state[delete_key] = False
+                            with col_no:
+                                if st.button("❌ Cancel", key=f"no_{paper_id}"):
+                                    st.session_state[delete_key] = False
+                                    st.rerun()
+                        else:
+                            # Initial state - show delete button
+                            if st.button("🗑️ Delete", key=f"btn_{paper_id}", type="secondary"):
+                                st.session_state[delete_key] = True
+                                st.rerun()
 
         else:
             error_msg = response.json().get("detail", "Unknown error")
