@@ -1,7 +1,7 @@
 #!/bin/bash
-# Startup script for ML Paper Recommender
+# Startup script for Pocket ML Paper RAG
 
-echo "Starting ML Paper Recommender API..."
+echo "Starting Pocket ML Paper RAG API..."
 echo "Make sure OPENAI_API_KEY is set in your environment"
 
 # Check if virtual environment exists

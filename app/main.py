@@ -15,7 +15,7 @@ from app.vector_store import VectorStore
 from app.query_engine import QueryEngine
 
 app = FastAPI(
-    title="ML Paper Recommender API",
+    title="Pocket ML Paper RAG API",
     description="Personal LLM-powered ML paper recommendation engine",
     version="0.1.0",
 )
@@ -55,7 +55,7 @@ class SearchResponse(BaseModel):
 async def root():
     """Root endpoint."""
     return {
-        "message": "ML Paper Recommender API",
+        "message": "Pocket ML Paper RAG API",
         "version": "0.1.0",
         "endpoints": {
             "upload": "/upload_pdf",

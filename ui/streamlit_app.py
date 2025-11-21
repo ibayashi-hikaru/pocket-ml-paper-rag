@@ -1,4 +1,4 @@
-"""Streamlit UI for ML Paper Recommender."""
+"""Streamlit UI for Pocket ML Paper RAG."""
 
 import os
 import sys
@@ -17,12 +17,12 @@ API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000")
 def main():
     """Main Streamlit application."""
     st.set_page_config(
-        page_title="ML Paper Recommender",
+        page_title="Pocket ML Paper RAG",
         page_icon="📚",
         layout="wide",
     )
 
-    st.title("📚 ML Paper Recommender")
+    st.title("📚 Pocket ML Paper RAG")
     st.markdown(
         "Upload research papers and discover similar papers with AI-powered explanations."
     )

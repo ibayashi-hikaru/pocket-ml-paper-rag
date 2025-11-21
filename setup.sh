@@ -1,7 +1,7 @@
 #!/bin/bash
-# Setup script for ML Paper Recommender
+# Setup script for Pocket ML Paper RAG
 
-echo "🔧 Setting up ML Paper Recommender..."
+echo "🔧 Setting up Pocket ML Paper RAG..."
 
 # Check Python version
 PYTHON_CMD=""

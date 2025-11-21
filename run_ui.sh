@@ -1,7 +1,7 @@
 #!/bin/bash
 # Startup script for Streamlit UI
 
-echo "Starting ML Paper Recommender UI..."
+echo "Starting Pocket ML Paper RAG UI..."
 
 # Check if virtual environment exists
 if [ ! -d "venv" ]; then

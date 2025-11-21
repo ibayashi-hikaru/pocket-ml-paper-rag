@@ -1,4 +1,4 @@
-# ML Paper Recommender
+# Pocket ML Paper RAG
 
 A personal LLM-powered research paper recommendation engine that helps you discover similar papers from your personal collection.
 
@@ -13,69 +13,170 @@ A personal LLM-powered research paper recommendation engine that helps you disco
 
 ## 📋 Requirements
 
-- Python 3.10, 3.11, or 3.12 (Python 3.13 not yet supported due to PyTorch compatibility)
-- OpenAI API key (for summarization and explanations)
-- ~500MB disk space (for embedding models)
+- **Python**: 3.10, 3.11, or 3.12 (Python 3.13 not yet supported due to PyTorch compatibility)
+- **Git**: For cloning the repository
+- **OpenAI API key**: Required for LLM summarization and explanations ([Get one here](https://platform.openai.com/api-keys))
+- **Disk space**: ~500MB for embedding models and dependencies
+- **Internet connection**: Required for initial setup (downloading models and packages)
 
 ## 🛠️ Installation
 
-1. **Clone or navigate to the project directory:**
+### Prerequisites
+
+- Python 3.10, 3.11, or 3.12 (Python 3.13 not yet supported due to PyTorch compatibility)
+- Git
+- OpenAI API key ([Get one here](https://platform.openai.com/api-keys))
+- ~500MB disk space (for embedding models)
+
+### Step-by-Step Installation
+
+1. **Clone the repository:**
+
+On GitHub, navigate to the repository page and click the green "Code" button to get the clone URL, then run:
+
 ```bash
-cd /Users/hikaruibayashi/Projects/RAG
+git clone https://github.com/YOUR_USERNAME/pocket-ml-paper-rag.git
+cd pocket-ml-paper-rag
 ```
 
-2. **Create a virtual environment (recommended):**
+**Note:** Replace `YOUR_USERNAME` with the actual GitHub username or organization name where the repository is hosted. You can also use SSH if you have SSH keys set up:
+
 ```bash
-# Use Python 3.11 or 3.12 (not 3.13 - PyTorch compatibility issue)
-python3.11 -m venv venv  # or python3.12
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+git clone git@github.com:YOUR_USERNAME/pocket-ml-paper-rag.git
+cd pocket-ml-paper-rag
 ```
 
-**Note:** If you're on Python 3.13, you'll need to use Python 3.11 or 3.12. Check your Python version:
+2. **Check your Python version:**
 ```bash
 python3 --version
 ```
 
-3. **Install dependencies:**
+**Note:** If you're using Python 3.13, you'll need to install Python 3.11 or 3.12. You can check which versions you have installed:
+```bash
+python3.11 --version  # or python3.12 --version
+```
+
+3. **Create a virtual environment (highly recommended):**
+```bash
+# Using Python 3.11 (recommended)
+python3.11 -m venv venv
+
+# Or using Python 3.12
+python3.12 -m venv venv
+```
+
+4. **Activate the virtual environment:**
+```bash
+# On macOS/Linux:
+source venv/bin/activate
+
+# On Windows:
+venv\Scripts\activate
+```
+
+After activation, you should see `(venv)` in your terminal prompt.
+
+5. **Upgrade pip (recommended):**
+```bash
+pip install --upgrade pip
+```
+
+6. **Install dependencies:**
 ```bash
 pip install -r requirements.txt
 ```
 
-4. **Set environment variables:**
+This may take a few minutes as it downloads and installs PyTorch and other dependencies.
+
+7. **Set up your OpenAI API key:**
+
+Create a `.env` file in the project root:
 ```bash
-export OPENAI_API_KEY="your-api-key-here"
+# On macOS/Linux:
+touch .env
+
+# On Windows:
+type nul > .env
 ```
 
-Or create a `.env` file:
+Then add your OpenAI API key to the `.env` file:
 ```
 OPENAI_API_KEY=your-api-key-here
 ```
 
-## 🚀 Usage
+**Note:** Never commit your `.env` file to version control. The `.gitignore` should already exclude it.
 
-### Start the Backend API
+Alternatively, you can set it as an environment variable:
+```bash
+# On macOS/Linux:
+export OPENAI_API_KEY="your-api-key-here"
+
+# On Windows (Command Prompt):
+set OPENAI_API_KEY=your-api-key-here
+
+# On Windows (PowerShell):
+$env:OPENAI_API_KEY="your-api-key-here"
+```
+
+## 🚀 Quick Start
+
+After installation, follow these steps to run the application:
+
+### 1. Start the Backend API
+
+Open a terminal and make sure your virtual environment is activated (you should see `(venv)` in your prompt). Then run:
 
 ```bash
-# Option 1: Using uvicorn directly
+# Using uvicorn directly (recommended)
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
-# Option 2: Run the main file
+# Alternative: Run as a Python module
 python -m app.main
 ```
 
-The API will be available at `http://localhost:8000`
+The API server will start and be available at `http://localhost:8000`
 
-API documentation: `http://localhost:8000/docs`
+- API documentation (Swagger UI): `http://localhost:8000/docs`
+- Alternative API docs (ReDoc): `http://localhost:8000/redoc`
 
-### Start the Streamlit UI
+Keep this terminal window open while using the application.
 
-In a new terminal:
+### 2. Start the Streamlit UI
+
+Open a **new terminal window** (keep the API server running in the first terminal). Navigate to the project directory, activate the virtual environment, and run:
 
 ```bash
+# Navigate to project directory
+cd /path/to/pocket-ml-paper-rag
+
+# Activate virtual environment
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Start Streamlit UI
 streamlit run ui/streamlit_app.py
 ```
 
-The UI will open in your browser at `http://localhost:8501`
+The Streamlit UI will automatically open in your default web browser at `http://localhost:8501`
+
+If it doesn't open automatically, navigate to `http://localhost:8501` manually.
+
+### First Steps
+
+1. **Upload a PDF**: Use the Streamlit UI to upload your first research paper
+2. **Search**: Enter a query to find similar papers in your collection
+3. **Explore**: Browse uploaded papers and view summaries and keywords
+
+## 📖 Detailed Usage
+
+### Using the Streamlit UI
+
+The Streamlit UI provides an easy-to-use interface for:
+- Uploading PDF papers
+- Searching your paper collection
+- Viewing paper summaries and keywords
+- Getting AI-generated explanations for paper recommendations
+
+Simply follow the on-screen instructions in the web interface.
 
 ### Using the API Directly
 
@@ -108,7 +209,7 @@ curl "http://localhost:8000/papers"
 ## 📁 Project Structure
 
 ```
-ml-paper-recommender/
+pocket-ml-paper-rag/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py              # FastAPI application
@@ -190,6 +291,60 @@ The database is stored in `db/chroma/` directory.
    - Retrieve top-k similar papers
    - Generate LLM explanations for relevance
 
+## ❗ Troubleshooting
+
+### Python Version Issues
+
+If you get errors about Python version compatibility:
+
+```bash
+# Check your Python version
+python3 --version
+
+# If you're using Python 3.13, install Python 3.11 or 3.12
+# On macOS using Homebrew:
+brew install python@3.11
+
+# On Ubuntu/Debian:
+sudo apt-get install python3.11 python3.11-venv
+```
+
+### PyTorch Installation Errors
+
+If you encounter PyTorch installation errors, see the `INSTALL.md` file for detailed instructions.
+
+### Import Errors
+
+If you get import errors after installation:
+
+1. Make sure your virtual environment is activated (`(venv)` should appear in your terminal)
+2. Reinstall dependencies: `pip install -r requirements.txt`
+3. Verify installation: `pip list | grep torch`
+
+### API Key Not Working
+
+1. Check that your `.env` file is in the project root directory
+2. Verify the file contains: `OPENAI_API_KEY=your-key-here` (no quotes in the file)
+3. Restart both the API server and Streamlit UI after adding/changing the API key
+
+### Port Already in Use
+
+If port 8000 or 8501 is already in use:
+
+```bash
+# For API server (change port to 8001):
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8001
+
+# For Streamlit (change port to 8502):
+streamlit run ui/streamlit_app.py --server.port 8502
+```
+
+### Connection Refused Errors
+
+- Make sure the API server is running before starting the Streamlit UI
+- Check that both services are running in separate terminals
+- Verify the API is accessible at `http://localhost:8000/docs`
+
 ## 🎯 Future Enhancements
 
 - [ ] Paper clustering and visualization (UMAP/t-SNE)
@@ -206,7 +361,13 @@ The database is stored in `db/chroma/` directory.
 
 ## 🤝 Contributing
 
-[Add contribution guidelines here]
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## 🙏 Acknowledgments
 

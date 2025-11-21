@@ -1,2 +1,2 @@
-"""Tests for ML Paper Recommender."""
+"""Tests for Pocket ML Paper RAG."""
 
