@@ -53,37 +53,14 @@ Open a terminal and make sure your virtual environment is activated (you should 
 Open a **new terminal window** (keep the API server running in the first terminal). Navigate to the project directory, activate the virtual environment, and run:
 
 ```bash
-# Navigate to project directory
 cd /path/to/pocket-ml-paper-rag
-
-# Activate virtual environment
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Start Streamlit UI
+source venv/bin/activate
 ./run_ui.sh
 ```
 
 The Streamlit UI will automatically open in your default web browser at `http://localhost:8501`
 
 If it doesn't open automatically, navigate to `http://localhost:8501` manually.
-
-### First Steps
-
-1. **Upload a PDF**: Use the Streamlit UI to upload your first research paper
-2. **Search**: Enter a query to find similar papers in your collection
-3. **Explore**: Browse uploaded papers and view summaries and keywords
-
-## 📖 Detailed Usage
-
-### Using the Streamlit UI
-
-The Streamlit UI provides an easy-to-use interface for:
-- Uploading PDF papers
-- Searching your paper collection
-- Viewing paper summaries and keywords
-- Getting AI-generated explanations for paper recommendations
-
-Simply follow the on-screen instructions in the web interface.
 
 ## 📁 Project Structure
 
